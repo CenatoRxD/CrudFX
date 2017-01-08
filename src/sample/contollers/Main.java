@@ -1,4 +1,4 @@
-package sample.main;
+package sample.contollers;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

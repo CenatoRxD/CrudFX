@@ -1,13 +1,11 @@
-package sample.interfacesAndClasses;
+package sample.contollers;
 
 import javafx.collections.ObservableList;
-
-import java.util.List;
 
 /**
  * Created by Sviatoslav on 23.12.2016.
  */
-public interface IEmployeeFX {
+public interface IEmployeeDAO {
 
     void add(Employee employee);
 

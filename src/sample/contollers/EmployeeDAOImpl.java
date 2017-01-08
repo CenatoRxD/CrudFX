@@ -1,44 +1,44 @@
-package sample.interfacesAndClasses;
+package sample.contollers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Sviatoslav on 23.12.2016.
  */
-public class EmployeeFXImpl implements IEmployeeFX {
+public class EmployeeDAOImpl implements IEmployeeDAO {
 
-    private ObservableList<Employee> employees = FXCollections.observableArrayList();
-
-    public EmployeeFXImpl() {
-    }
+    private ObservableList<Employee> employeeList = FXCollections.observableArrayList();
 
     public ObservableList<Employee> getEmployees() {
-        return employees;
+        return employeeList;
     }
 
     @Override
     public void add(Employee employee) {
-        employees.add(employee);
+        employeeList.add(employee);
     }
 
     @Override
     public void update(int id, Employee employee) {
-        employees.set(id, employee);
+        employeeList.set(id, employee);
     }
 
     @Override
     public void delete(int id) {
-        employees.remove(id);
+        employeeList.remove(id);
     }
 
     @Override
     public Employee get(int id) {
-        return employees.get(id);
+        return employeeList.get(id);
     }
 
     @Override
     public ObservableList<Employee> getAll() {
-        return employees;
+        return employeeList;
     }
 }

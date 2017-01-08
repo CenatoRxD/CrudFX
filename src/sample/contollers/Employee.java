@@ -1,13 +1,13 @@
-package sample.interfacesAndClasses;
+package sample.contollers;
 
 /**
  * Created by Sviatoslav on 23.12.2016.
  */
 public class Employee {
-
     private String name;
     private  int age;
     private  int salary;
+
 
     public Employee(String name, int age, int salary) {
         this.name = name;
@@ -38,6 +38,5 @@ public class Employee {
     public void setSalary(int salary) {
         this.salary = salary;
     }
-
 
 }
