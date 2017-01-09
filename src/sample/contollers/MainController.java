@@ -53,13 +53,13 @@ public class MainController {
         txtName.setPromptText("Name");
         txtAge.setPromptText("Age");
         txtSalary.setPromptText("Salary");
-        dao.add(new Employee("adf", 151, 15));
-        dao.add(new Employee("adf", 151, 15));
-        dao.add(new Employee("adf", 151, 15));
-        //columnID.setCellValueFactory(new PropertyValueFactory<EmployeeFXImpl, Integer>("size"));
+        columnID.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("id"));
         columnName.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
         columnAge.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("age"));
         columnSalary.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("salary"));
+        dao.add(new Employee("adf", 151, 15));
+        dao.add(new Employee("adf", 151, 15));
+        dao.add(new Employee("adf", 151, 15));
     }
 
     private Employee getEmp() throws IOException {

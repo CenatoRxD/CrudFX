@@ -4,15 +4,19 @@ package sample.contollers;
  * Created by Sviatoslav on 23.12.2016.
  */
 public class Employee {
+    public static int id = 0;
     private String name;
-    private  int age;
-    private  int salary;
-
+    private int age;
+    private int salary;
 
     public Employee(String name, int age, int salary) {
         this.name = name;
         this.age = age;
         this.salary = salary;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

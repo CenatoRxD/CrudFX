@@ -14,7 +14,7 @@ public class Main extends Application {
         primaryStage.setTitle("CrudFX");
         primaryStage.setScene(new Scene(root));
         primaryStage.setMinHeight(300);
-        primaryStage.setMinWidth(350);
+        primaryStage.setMinWidth(400);
         primaryStage.show();
     }
 
