@@ -20,7 +20,6 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
     @Override
     public void add(Employee employee) {
         employeeList.add(employee);
-        Employee.id++;
     }
 
     @Override
@@ -31,7 +30,6 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
     @Override
     public void delete(int id) {
         employeeList.remove(id);
-        Employee.id--;
     }
 
     @Override

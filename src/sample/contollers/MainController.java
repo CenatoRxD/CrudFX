@@ -7,6 +7,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 
@@ -60,6 +63,7 @@ public class MainController {
         dao.add(new Employee("adf", 151, 15));
         dao.add(new Employee("adf", 151, 15));
         dao.add(new Employee("adf", 151, 15));
+
     }
 
     private Employee getEmp() throws IOException {
@@ -78,10 +82,13 @@ public class MainController {
     }
 
     public void delete(ActionEvent actionEvent) {
+        int selectedItem = tabViewCollection.getSelectionModel().getSelectedIndex();
+        tabViewCollection.getItems().remove(dao.getEmployees().remove(selectedItem));
     }
 
 
     public void getAll(ActionEvent actionEvent) {
         tabViewCollection.setItems(dao.getAll());
     }
+
 }
