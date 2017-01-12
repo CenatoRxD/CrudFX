@@ -8,19 +8,19 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Employee {
     public static int count = 1;
-    private SimpleIntegerProperty id;
+    private SimpleStringProperty id;
     private SimpleStringProperty name;
-    private SimpleIntegerProperty age;
-    private SimpleIntegerProperty salary;
+    private SimpleStringProperty age;
+    private SimpleStringProperty salary;
 
-    public Employee(String name, int age, int salary) {
+    public Employee(String name, String age, String salary) {
         this.name = new SimpleStringProperty(name);
-        this.age = new SimpleIntegerProperty(age);
-        this.salary = new SimpleIntegerProperty(salary);
-        this.id = new SimpleIntegerProperty(count++);
+        this.age = new SimpleStringProperty(age);
+        this.salary = new SimpleStringProperty(salary);
+        this.id = new SimpleStringProperty(String.valueOf(count++));
     }
 
-    public int getId() {
+    public String getId() {
         return id.get();
     }
 
@@ -32,19 +32,19 @@ public class Employee {
         this.name.set(name);
     }
 
-    public int getAge() {
+    public String getAge() {
         return age.get();
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age.set(age);
     }
 
-    public int getSalary() {
+    public String getSalary() {
         return salary.get();
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(String salary) {
         this.salary.set(salary);
     }
 

@@ -8,8 +8,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.cell.TextFieldTreeTableCell;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
 
@@ -22,16 +20,16 @@ public class MainController {
     private TableView<Employee> tabViewCollection;
 
     @FXML
-    private TableColumn<Employee, Integer> columnID;
+    private TableColumn<Employee, String> columnID;
 
     @FXML
     private TableColumn<Employee, String> columnName;
 
     @FXML
-    private TableColumn<Employee, Integer> columnAge;
+    private TableColumn<Employee, String> columnAge;
 
     @FXML
-    private TableColumn<Employee, Integer> columnSalary;
+    private TableColumn<Employee, String> columnSalary;
 
     @FXML
     private TextField txtName;
@@ -56,20 +54,26 @@ public class MainController {
         txtName.setPromptText("Name");
         txtAge.setPromptText("Age");
         txtSalary.setPromptText("Salary");
-        columnID.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("id"));
-        columnName.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
-        columnAge.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("age"));
-        columnSalary.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("salary"));
-        dao.add(new Employee("adf", 151, 15));
-        dao.add(new Employee("adf", 151, 15));
-        dao.add(new Employee("adf", 151, 15));
+        columnID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        columnAge.setCellValueFactory(new PropertyValueFactory<>("age"));
+        columnSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        dao.add(new Employee("adf", "151", "15"));
+        dao.add(new Employee("adf", "151", "15"));
+        dao.add(new Employee("adf", "151", "15"));
+        dao.add(new Employee("adf", "151", "15"));
+
+        columnID.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnName.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnAge.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnSalary.setCellFactory(TextFieldTableCell.forTableColumn());
 
     }
 
     private Employee getEmp() throws IOException {
         String name = txtName.getText();
-        int age = Integer.parseInt(txtAge.getText());
-        int salary = Integer.parseInt(txtSalary.getText());
+        String age = txtAge.getText();
+        String salary = txtSalary.getText();
         return new Employee(name, age, salary);
     }
 
@@ -86,9 +90,34 @@ public class MainController {
         tabViewCollection.getItems().remove(dao.getEmployees().remove(selectedItem));
     }
 
-
     public void getAll(ActionEvent actionEvent) {
         tabViewCollection.setItems(dao.getAll());
     }
 
+    public void editId(TableColumn.CellEditEvent<Employee, String> editID) {
+        editID.getTableView().
+                getItems().
+                get(editID.getTablePosition().getRow()).
+                setName(editID.getNewValue());
+    }
+
+    public void changeName(TableColumn.CellEditEvent<Employee, String> editEvent) {
+        editEvent.getTableView().
+                getItems().
+                get(editEvent.getTablePosition().getRow()).
+                setName(editEvent.getNewValue());
+        tabViewCollection.setItems(dao.getAll());
+    }
+
+    public void editAge(TableColumn.CellEditEvent<Employee, String> editAge) {
+        editAge.getTableView().
+                getItems().get(editAge.getTablePosition().getRow()).
+                setName(editAge.getNewValue());
+    }
+
+    public void editSalary(TableColumn.CellEditEvent<Employee, String> editSalary) {
+        editSalary.getTableView().
+                getItems().get(editSalary.getTablePosition().getRow()).
+                setName(editSalary.getNewValue());
+    }
 }

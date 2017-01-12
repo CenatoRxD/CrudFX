@@ -11,21 +11,15 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="345.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.contollers.MainController">
    <children>
-      <AnchorPane prefHeight="144.0" prefWidth="378.0">
+      <AnchorPane prefHeight="102.0" prefWidth="388.0">
          <children>
-            <Label layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="40.0" text="ID" AnchorPane.leftAnchor="14.0" />
-            <Label layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="40.0" text="Name" AnchorPane.leftAnchor="14.0" />
-            <Label layoutX="14.0" layoutY="60.0" prefHeight="25.0" prefWidth="40.0" text="Age" AnchorPane.leftAnchor="14.0" />
-            <TextField fx:id="txtAge" layoutX="70.0" layoutY="60.0" prefWidth="100.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="218.0" />
-            <TextField fx:id="txtSalary" layoutX="70.0" layoutY="93.0" prefWidth="100.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="218.0" />
-            <TextField layoutX="70.0" layoutY="2.0" prefWidth="100.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="218.0" />
-            <TextField fx:id="txtName" layoutX="70.0" layoutY="31.0" prefWidth="100.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="218.0" />
-            <Label layoutX="14.0" layoutY="93.0" prefHeight="25.0" prefWidth="40.0" text="Salary" AnchorPane.leftAnchor="14.0" />
-            <Button fx:id="buttonAdd" layoutX="189.0" layoutY="6.0" mnemonicParsing="false" onAction="#add" prefHeight="15.0" prefWidth="60.0" text="Add" AnchorPane.rightAnchor="150.0" />
-            <Button layoutX="189.0" layoutY="34.0" mnemonicParsing="false" prefWidth="60.0" text="Update" AnchorPane.rightAnchor="150.0" />
-            <Button fx:id="buttonDelete" layoutX="189.0" layoutY="63.0" mnemonicParsing="false" onAction="#delete" prefHeight="15.0" prefWidth="60.0" text="Delete" AnchorPane.rightAnchor="150.0" />
-            <Button layoutX="189.0" layoutY="91.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Get" AnchorPane.rightAnchor="150.0" />
-            <Button fx:id="buttonGetAll" layoutX="260.0" layoutY="48.0" mnemonicParsing="false" onAction="#getAll" prefHeight="15.0" prefWidth="60.0" text="Get All" AnchorPane.rightAnchor="80.0" />
+            <Label layoutX="82.0" layoutY="8.0" prefHeight="25.0" prefWidth="40.0" text="Name" AnchorPane.leftAnchor="82.0" />
+            <Label layoutX="82.0" layoutY="37.0" prefHeight="25.0" prefWidth="40.0" text="Age" AnchorPane.leftAnchor="82.0" />
+            <TextField fx:id="txtAge" layoutX="138.0" layoutY="37.0" prefWidth="100.0" AnchorPane.leftAnchor="138.0" AnchorPane.rightAnchor="150.0" />
+            <TextField fx:id="txtSalary" layoutX="138.0" layoutY="70.0" prefWidth="100.0" AnchorPane.leftAnchor="138.0" AnchorPane.rightAnchor="150.0" />
+            <TextField fx:id="txtName" layoutX="138.0" layoutY="8.0" prefWidth="100.0" AnchorPane.leftAnchor="138.0" AnchorPane.rightAnchor="150.0" />
+            <Label layoutX="82.0" layoutY="70.0" prefHeight="25.0" prefWidth="40.0" text="Salary" AnchorPane.leftAnchor="82.0" />
+            <Button fx:id="buttonAdd" layoutX="246.0" layoutY="42.0" mnemonicParsing="false" onAction="#add" prefHeight="15.0" prefWidth="60.0" text="Add" AnchorPane.rightAnchor="82.0" />
          </children>
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -33,12 +27,14 @@
       </AnchorPane>
       <AnchorPane prefHeight="199.0" prefWidth="362.0" VBox.vgrow="ALWAYS">
          <children>
-            <TableView fx:id="tabViewCollection" editable="true" layoutX="-2.0" prefHeight="223.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button fx:id="buttonGetAll" layoutX="239.0" layoutY="191.0" mnemonicParsing="false" onAction="#getAll" prefHeight="15.0" prefWidth="60.0" text="Get All" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="89.0" />
+            <Button fx:id="buttonDelete" layoutX="78.0" layoutY="191.0" mnemonicParsing="false" onAction="#delete" prefHeight="15.0" prefWidth="60.0" text="Delete" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="78.0" />
+            <TableView fx:id="tabViewCollection" editable="true" layoutX="-2.0" prefHeight="190.0" prefWidth="388.0" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn fx:id="columnID" prefWidth="38.0" text="ID" />
-                <TableColumn fx:id="columnName" prefWidth="116.0" text="Name" />
-                  <TableColumn fx:id="columnAge" prefWidth="52.0" text="Age" />
-                  <TableColumn fx:id="columnSalary" prefWidth="83.0" text="Salary" />
+                <TableColumn fx:id="columnID" onEditCommit="#editId" prefWidth="38.0" text="ID" />
+                <TableColumn fx:id="columnName" onEditCommit="#changeName" prefWidth="116.0" text="Name" />
+                  <TableColumn fx:id="columnAge" onEditCommit="#editAge" prefWidth="52.0" text="Age" />
+                  <TableColumn fx:id="columnSalary" onEditCommit="#editSalary" prefWidth="83.0" text="Salary" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
