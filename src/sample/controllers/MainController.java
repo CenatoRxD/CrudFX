@@ -63,6 +63,7 @@ public class MainController {
         dao.add(new Employee("adf", "151", "15"));
         dao.add(new Employee("adf", "151", "15"));
 
+        tabViewCollection.setItems(dao.getEmployees());
         columnName.setCellFactory(TextFieldTableCell.forTableColumn());
         columnAge.setCellFactory(TextFieldTableCell.forTableColumn());
         columnSalary.setCellFactory(TextFieldTableCell.forTableColumn());
