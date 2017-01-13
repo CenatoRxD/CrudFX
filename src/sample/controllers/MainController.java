@@ -78,8 +78,10 @@ public class MainController {
     }
 
     public void add(ActionEvent actionEvent) throws IOException {
+        if (!validAdd()) {
+            return;
+        }
         dao.add(getEmp());
-        //tabViewCollection.setItems(dao.getEmployees());
         txtName.clear();
         txtAge.clear();
         txtSalary.clear();
@@ -87,8 +89,11 @@ public class MainController {
 
     public void delete(ActionEvent actionEvent) {
         int selectedItem = tabViewCollection.getSelectionModel().getSelectedIndex();
-        //tabViewCollection.getItems().remove(dao.getEmployees().remove(selectedItem));
+        if (!validDelete(selectedItem)) {
+            return;
+        }
         dao.delete(selectedItem);
+
     }
 
     public void getAll(ActionEvent actionEvent) {
@@ -112,5 +117,29 @@ public class MainController {
         editSalary.getTableView().
                 getItems().get(editSalary.getTablePosition().getRow()).
                 setSalary(editSalary.getNewValue());
+    }
+
+    private boolean validAdd() {
+        if (txtName.getText().trim().length() == 0 ||
+                txtAge.getText().trim().length() == 0 ||
+                txtSalary.getText().trim().length() == 0) {
+            ErrorDialog.showErrorDialog("Error!!!", "Fill all fields");
+            return false;
+        } else if (!txtAge.getText().matches("[0-9]*")) {
+            ErrorDialog.showErrorDialog("Error!!!", "Incorrect Age, write number 0 - 9 ");
+            return false;
+        } else if (!txtSalary.getText().matches("[0-9]*")) {
+            ErrorDialog.showErrorDialog("Error!!!", "Incorrect Salary, write number 0 - 9 ");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validDelete(int selectedItem) {
+        if (selectedItem == -1) {
+            ErrorDialog.showErrorDialog("Error!!!", "Select some Employee");
+            return false;
+        }
+        return true;
     }
 }
