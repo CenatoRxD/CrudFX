@@ -1,4 +1,4 @@
-package sample.contollers;
+package sample.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class MainController {
 
-    EmployeeDAOImpl dao = new EmployeeDAOImpl();
+    private EmployeeDAOImpl dao = new EmployeeDAOImpl();
 
     @FXML
     private TableView<Employee> tabViewCollection;
@@ -63,10 +63,10 @@ public class MainController {
         dao.add(new Employee("adf", "151", "15"));
         dao.add(new Employee("adf", "151", "15"));
 
-        columnID.setCellFactory(TextFieldTableCell.forTableColumn());
         columnName.setCellFactory(TextFieldTableCell.forTableColumn());
         columnAge.setCellFactory(TextFieldTableCell.forTableColumn());
         columnSalary.setCellFactory(TextFieldTableCell.forTableColumn());
+
 
     }
 
@@ -79,7 +79,7 @@ public class MainController {
 
     public void add(ActionEvent actionEvent) throws IOException {
         dao.add(getEmp());
-        tabViewCollection.setItems(dao.getEmployees());
+        //tabViewCollection.setItems(dao.getEmployees());
         txtName.clear();
         txtAge.clear();
         txtSalary.clear();
@@ -87,37 +87,30 @@ public class MainController {
 
     public void delete(ActionEvent actionEvent) {
         int selectedItem = tabViewCollection.getSelectionModel().getSelectedIndex();
-        tabViewCollection.getItems().remove(dao.getEmployees().remove(selectedItem));
+        //tabViewCollection.getItems().remove(dao.getEmployees().remove(selectedItem));
+        dao.delete(selectedItem);
     }
 
     public void getAll(ActionEvent actionEvent) {
         tabViewCollection.setItems(dao.getAll());
     }
 
-    public void editId(TableColumn.CellEditEvent<Employee, String> editID) {
-        editID.getTableView().
+    public void changeName(TableColumn.CellEditEvent<Employee, String> editName) {
+        editName.getTableView().
                 getItems().
-                get(editID.getTablePosition().getRow()).
-                setName(editID.getNewValue());
-    }
-
-    public void changeName(TableColumn.CellEditEvent<Employee, String> editEvent) {
-        editEvent.getTableView().
-                getItems().
-                get(editEvent.getTablePosition().getRow()).
-                setName(editEvent.getNewValue());
-        tabViewCollection.setItems(dao.getAll());
+                get(editName.getTablePosition().getRow()).
+                setName(editName.getNewValue());
     }
 
     public void editAge(TableColumn.CellEditEvent<Employee, String> editAge) {
         editAge.getTableView().
                 getItems().get(editAge.getTablePosition().getRow()).
-                setName(editAge.getNewValue());
+                setAge(editAge.getNewValue());
     }
 
     public void editSalary(TableColumn.CellEditEvent<Employee, String> editSalary) {
         editSalary.getTableView().
                 getItems().get(editSalary.getTablePosition().getRow()).
-                setName(editSalary.getNewValue());
+                setSalary(editSalary.getNewValue());
     }
 }

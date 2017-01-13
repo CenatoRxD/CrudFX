@@ -1,4 +1,4 @@
-package sample.contollers;
+package sample.controllers;
 
 import javafx.collections.ObservableList;
 
@@ -9,9 +9,9 @@ public interface IEmployeeDAO {
 
     void add(Employee employee);
 
-    //void update(int id, Employee employee);
+    void update(int id, Employee employee);
 
-    //void delete(int id);
+    void delete(int id);
 
     //Employee get(int id);
 

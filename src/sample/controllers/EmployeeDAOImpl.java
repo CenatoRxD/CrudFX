@@ -1,10 +1,7 @@
-package sample.contollers;
+package sample.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Sviatoslav on 23.12.2016.
@@ -22,15 +19,15 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
         employeeList.add(employee);
     }
 
-    /*@Override
+    @Override
     public void update(int id, Employee employee) {
         employeeList.set(id, employee);
-    }*/
+    }
 
-    /*@Override
+    @Override
     public void delete(int id) {
         employeeList.remove(id);
-    }*/
+    }
 
     /*@Override
     public Employee get(int id) {
