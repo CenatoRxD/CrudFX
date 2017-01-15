@@ -3,7 +3,8 @@ package sample.controllers;
 import javafx.collections.ObservableList;
 
 /**
- * Created by Sviatoslav on 23.12.2016.
+ * @author Sviatoslav
+ *         Intarface with some behavior
  */
 public interface IEmployeeDAO {
 
@@ -13,7 +14,7 @@ public interface IEmployeeDAO {
 
     void delete(int id);
 
-    //Employee get(int id);
+    Employee get(int id);
 
     ObservableList<Employee> getAll();
 }

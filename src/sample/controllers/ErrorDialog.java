@@ -3,10 +3,16 @@ package sample.controllers;
 import javafx.scene.control.Alert;
 
 /**
- * Created by Sviatoslav on 13.01.2017.
+ * @author Sviatoslav
  */
 public class ErrorDialog {
-    public static void showErrorDialog(String title, String txt){
+    /**
+     * Static method whose will showing error window.
+     *
+     * @param title - title error window;
+     * @param txt   - error massage.
+     */
+    public static void showErrorDialog(String title, String txt) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setContentText(txt);

@@ -9,12 +9,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
-import java.io.IOException;
-
-
+/**
+ * Controller for realization any actions in UI.
+ *
+ * @author Sviatoslav
+ */
 public class MainController {
 
     private EmployeeDAOImpl dao = new EmployeeDAOImpl();
+
 
     @FXML
     private TableView<Employee> tabViewCollection;
@@ -67,18 +70,28 @@ public class MainController {
         columnName.setCellFactory(TextFieldTableCell.forTableColumn());
         columnAge.setCellFactory(TextFieldTableCell.forTableColumn());
         columnSalary.setCellFactory(TextFieldTableCell.forTableColumn());
-
-
     }
 
-    private Employee getEmp() throws IOException {
+    /**
+     * Method for creating employees.
+     *
+     * @return new employee
+     */
+    private Employee getEmp() {
         String name = txtName.getText();
         String age = txtAge.getText();
         String salary = txtSalary.getText();
         return new Employee(name, age, salary);
     }
 
-    public void add(ActionEvent actionEvent) throws IOException {
+    /**
+     * Method adding new employee in database.
+     *
+     * @param actionEvent - click on button "add".
+     */
+
+    @FXML
+    public void add(ActionEvent actionEvent) {
         if (!validAdd()) {
             return;
         }
@@ -88,6 +101,12 @@ public class MainController {
         txtSalary.clear();
     }
 
+    /**
+     * Method deleting employee from database.
+     *
+     * @param actionEvent - click on button " delete".
+     */
+    @FXML
     public void delete(ActionEvent actionEvent) {
         int selectedItem = tabViewCollection.getSelectionModel().getSelectedIndex();
         if (!validDelete(selectedItem)) {
@@ -97,10 +116,19 @@ public class MainController {
 
     }
 
+    /**
+     * Method for getting all employees from database.
+     *
+     * @param actionEvent - click on button "get All".
+     */
+    @FXML
     public void getAll(ActionEvent actionEvent) {
         tabViewCollection.setItems(dao.getAll());
     }
 
+    /**
+     * @param editName - section in Name's row were we will changing name of employee.
+     */
     public void changeName(TableColumn.CellEditEvent<Employee, String> editName) {
         editName.getTableView().
                 getItems().
@@ -108,18 +136,31 @@ public class MainController {
                 setName(editName.getNewValue());
     }
 
+    /**
+     * @param editAge - section in Age's row were we will changing age of employee.
+     */
     public void editAge(TableColumn.CellEditEvent<Employee, String> editAge) {
         editAge.getTableView().
                 getItems().get(editAge.getTablePosition().getRow()).
                 setAge(editAge.getNewValue());
     }
 
+    /**
+     * @param editSalary - section in Salary's row were we will changing salary of employee.
+     */
     public void editSalary(TableColumn.CellEditEvent<Employee, String> editSalary) {
         editSalary.getTableView().
                 getItems().get(editSalary.getTablePosition().getRow()).
                 setSalary(editSalary.getNewValue());
     }
 
+    /**
+     * Validation for button "add".
+     *
+     * @return - true, if user correct filled text field;
+     * false, if text field filled incorrect and show ErrorDialog.
+     * @see ErrorDialog
+     */
     private boolean validAdd() {
         if (txtName.getText().trim().length() == 0 ||
                 txtAge.getText().trim().length() == 0 ||
@@ -136,6 +177,14 @@ public class MainController {
         return true;
     }
 
+    /**
+     * Validation for button "delete".
+     *
+     * @param selectedItem - employee whose will deleting.
+     * @return - - true, if user selected any employee;
+     * false, if user don't select employee in database and show ErrorDialog.
+     * @see ErrorDialog
+     */
     private boolean validDelete(int selectedItem) {
         if (selectedItem == -1) {
             ErrorDialog.showErrorDialog("Error!!!", "Select some Employee");
@@ -143,4 +192,5 @@ public class MainController {
         }
         return true;
     }
+
 }
