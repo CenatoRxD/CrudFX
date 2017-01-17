@@ -84,6 +84,7 @@ public class MainController {
         return new Employee(name, age, salary);
     }
 
+
     /**
      * Method adding new employee in database.
      *
@@ -140,7 +141,7 @@ public class MainController {
      * @param editAge - section in Age's row were we will changing age of employee.
      */
     public void editAge(TableColumn.CellEditEvent<Employee, String> editAge) {
-        editAge.getTableView().
+          editAge.getTableView().
                 getItems().get(editAge.getTablePosition().getRow()).
                 setAge(editAge.getNewValue());
     }
