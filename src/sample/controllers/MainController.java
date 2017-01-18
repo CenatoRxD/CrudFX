@@ -2,12 +2,19 @@ package sample.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Controller for realization any actions in UI.
@@ -103,17 +110,25 @@ public class MainController {
     }
 
     /**
-     * Method deleting employee from database.
+     * Method showing pop-up Window for deleting.
      *
      * @param actionEvent - click on button " delete".
      */
     @FXML
-    public void delete(ActionEvent actionEvent) {
-        int selectedItem = tabViewCollection.getSelectionModel().getSelectedIndex();
+    public void delete(ActionEvent actionEvent) throws IOException {
+        Stage popUp = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/popUp.fxml"));
+        Parent root1 = loader.load();
+        popUp.setTitle("Delete");
+        popUp.setResizable(false);
+        popUp.initModality(Modality.APPLICATION_MODAL);
+        popUp.setScene(new Scene(root1));
+        popUp.show();
+        /*int selectedItem = tabViewCollection.getSelectionModel().getSelectedIndex();
         if (!validDelete(selectedItem)) {
             return;
         }
-        dao.delete(selectedItem);
+        dao.delete(selectedItem);*/
 
     }
 
@@ -141,7 +156,7 @@ public class MainController {
      * @param editAge - section in Age's row were we will changing age of employee.
      */
     public void editAge(TableColumn.CellEditEvent<Employee, String> editAge) {
-          editAge.getTableView().
+        editAge.getTableView().
                 getItems().get(editAge.getTablePosition().getRow()).
                 setAge(editAge.getNewValue());
     }
@@ -163,6 +178,7 @@ public class MainController {
      * @see ErrorDialog
      */
     private boolean validAdd() {
+
         if (txtName.getText().trim().length() == 0 ||
                 txtAge.getText().trim().length() == 0 ||
                 txtSalary.getText().trim().length() == 0) {
