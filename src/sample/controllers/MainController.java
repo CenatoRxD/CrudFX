@@ -24,7 +24,11 @@ import java.io.IOException;
 public class MainController {
 
     private EmployeeDAOImpl dao = new EmployeeDAOImpl();
-
+    private Parent fxmlEdit;
+    private FXMLLoader fxmlLoader = new FXMLLoader();
+    private PopUpController popUpController;
+    private Stage popUpStage;
+    private Stage mainStage;
 
     @FXML
     private TableView<Employee> tabViewCollection;
@@ -60,7 +64,7 @@ public class MainController {
     Button buttonGetAll;
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
         txtName.setPromptText("Name");
         txtAge.setPromptText("Age");
         txtSalary.setPromptText("Salary");
@@ -77,6 +81,22 @@ public class MainController {
         columnName.setCellFactory(TextFieldTableCell.forTableColumn());
         columnAge.setCellFactory(TextFieldTableCell.forTableColumn());
         columnSalary.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        fxmlLoader.setLocation(getClass().getResource("../fxml/popUp.fxml"));
+        fxmlEdit = fxmlLoader.load();
+        popUpController = fxmlLoader.getController();
+    }
+
+    public void setMainStage(Stage mainStage) {
+        this.mainStage = mainStage;
+    }
+
+    public TableView<Employee> getTabViewCollection() {
+        return tabViewCollection;
+    }
+
+    public void setTabViewCollection(TableView<Employee> tabViewCollection) {
+        this.tabViewCollection = tabViewCollection;
     }
 
     /**
@@ -116,20 +136,20 @@ public class MainController {
      */
     @FXML
     public void delete(ActionEvent actionEvent) throws IOException {
-        Stage popUp = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/popUp.fxml"));
-        Parent root1 = loader.load();
-        popUp.setTitle("Delete");
-        popUp.setResizable(false);
-        popUp.initModality(Modality.APPLICATION_MODAL);
-        popUp.setScene(new Scene(root1));
-        popUp.show();
-        /*int selectedItem = tabViewCollection.getSelectionModel().getSelectedIndex();
+        int selectedItem = tabViewCollection.getSelectionModel().getSelectedIndex();
         if (!validDelete(selectedItem)) {
             return;
         }
-        dao.delete(selectedItem);*/
+        if (popUpStage == null) {
+            popUpStage = new Stage();
+            popUpStage.setTitle("Delete Employee");
+            popUpStage.setResizable(false);
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.initOwner(mainStage);
+            popUpStage.setScene(new Scene(fxmlEdit));
+        }
 
+        popUpStage.show();
     }
 
     /**

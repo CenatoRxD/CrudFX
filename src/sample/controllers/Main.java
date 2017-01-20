@@ -10,9 +10,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/sample.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../fxml/sample.fxml"));
+        Parent fxmlMain = fxmlLoader.load();
+        MainController mainController = fxmlLoader.getController();
+        mainController.setMainStage(primaryStage);
         primaryStage.setTitle("CrudFX");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(fxmlMain));
         primaryStage.setMinHeight(300);
         primaryStage.setMinWidth(400);
         primaryStage.show();

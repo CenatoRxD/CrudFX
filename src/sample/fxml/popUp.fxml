@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0"
             prefWidth="291.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sample.controllers.popUpController">
+            fx:controller="sample.controllers.PopUpController">
     <children>
         <Label layoutX="8.0" layoutY="4.0" prefHeight="20.0" prefWidth="293.0"
                text="Are you really want to delete this employee?">
