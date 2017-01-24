@@ -2,16 +2,12 @@ package sample.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,17 +20,10 @@ import java.io.IOException;
 public class MainController {
 
     private EmployeeDAOImpl dao = new EmployeeDAOImpl();
-    private Parent fxmlEdit;
-    private FXMLLoader fxmlLoader = new FXMLLoader();
-    private PopUpController popUpController;
-    private Stage popUpStage;
     private Stage mainStage;
 
     @FXML
     private TableView<Employee> tabViewCollection;
-
-    @FXML
-    private TableColumn<Employee, String> columnID;
 
     @FXML
     private TableColumn<Employee, String> columnName;
@@ -64,39 +53,26 @@ public class MainController {
     Button buttonGetAll;
 
     @FXML
-    private void initialize() throws IOException {
+    private void initialize() {
         txtName.setPromptText("Name");
         txtAge.setPromptText("Age");
         txtSalary.setPromptText("Salary");
-        columnID.setCellValueFactory(new PropertyValueFactory<>("id"));
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         columnAge.setCellValueFactory(new PropertyValueFactory<>("age"));
         columnSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
-        dao.add(new Employee("adf", "151", "15"));
-        dao.add(new Employee("adf", "151", "15"));
-        dao.add(new Employee("adf", "151", "15"));
-        dao.add(new Employee("adf", "151", "15"));
+        dao.add(new Employee("q", "1", "15"));
+        dao.add(new Employee("w", "2", "15222"));
+        dao.add(new Employee("e", "3", "3333"));
+        dao.add(new Employee("r", "4", "4444"));
 
         tabViewCollection.setItems(dao.getEmployees());
         columnName.setCellFactory(TextFieldTableCell.forTableColumn());
         columnAge.setCellFactory(TextFieldTableCell.forTableColumn());
         columnSalary.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        fxmlLoader.setLocation(getClass().getResource("../fxml/popUp.fxml"));
-        fxmlEdit = fxmlLoader.load();
-        popUpController = fxmlLoader.getController();
     }
 
     public void setMainStage(Stage mainStage) {
         this.mainStage = mainStage;
-    }
-
-    public TableView<Employee> getTabViewCollection() {
-        return tabViewCollection;
-    }
-
-    public void setTabViewCollection(TableView<Employee> tabViewCollection) {
-        this.tabViewCollection = tabViewCollection;
     }
 
     /**
@@ -130,7 +106,7 @@ public class MainController {
     }
 
     /**
-     * Method showing pop-up Window for deleting.
+     * Method delete selected employee.
      *
      * @param actionEvent - click on button " delete".
      */
@@ -140,16 +116,7 @@ public class MainController {
         if (!validDelete(selectedItem)) {
             return;
         }
-        if (popUpStage == null) {
-            popUpStage = new Stage();
-            popUpStage.setTitle("Delete Employee");
-            popUpStage.setResizable(false);
-            popUpStage.initModality(Modality.APPLICATION_MODAL);
-            popUpStage.initOwner(mainStage);
-            popUpStage.setScene(new Scene(fxmlEdit));
-        }
-
-        popUpStage.show();
+        dao.delete(selectedItem);
     }
 
     /**

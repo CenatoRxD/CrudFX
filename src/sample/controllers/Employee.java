@@ -8,8 +8,6 @@ import javafx.beans.property.SimpleStringProperty;
  *          This class for creating new employees.
  */
 public class Employee {
-    public static int count = 1;
-    private SimpleStringProperty id;
     private SimpleStringProperty name;
     private SimpleStringProperty age;
     private SimpleStringProperty salary;
@@ -25,14 +23,6 @@ public class Employee {
         this.name = new SimpleStringProperty(name);
         this.age = new SimpleStringProperty(age);
         this.salary = new SimpleStringProperty(salary);
-        this.id = new SimpleStringProperty(String.valueOf(count++));
-    }
-
-    /**
-     * @return Id our employee.
-     */
-    public String getId() {
-        return id.get();
     }
 
     /**

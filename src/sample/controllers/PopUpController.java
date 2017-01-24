@@ -11,7 +11,6 @@ import javafx.stage.Stage;
  */
 public class PopUpController {
     private MainController mainController = new MainController();
-    private EmployeeDAOImpl dao = new EmployeeDAOImpl();
 
     @FXML
     private Button btnNo;
@@ -21,9 +20,10 @@ public class PopUpController {
 
     @FXML
     void delete(ActionEvent event) {
-        /*int selectedItem = mainController.getTabViewCollection().getSelectionModel().getFocusedIndex();
-        dao.delete(selectedItem);*/
-        close(event);
+
+      /*  int selectedItem = mainController.getTabViewCollection().getSelectionModel().getSelectedIndex();
+        mainController.getDao().delete(selectedItem);
+        close(event);*/
 
     }
 
